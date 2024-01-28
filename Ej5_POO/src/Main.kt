@@ -1,7 +1,6 @@
 /*Ejercicio 4.5¶
 
 Crear una clase Tiempo, que refleja las horas de un día, es decír, desde 00:00:00 hasta 23:59:59, con atributos hora, minuto y segundo, que pueda ser construida indicando los tres atributos, sólo hora y minuto o sólo la hora (si no se indica, el valor de minuto o segundo será 0).
-
 Crear el método toString() para mostrar el tiempo en formato: XXh XXm XXs.
 
 En el programa principal, debe solicitar por teclado hora, minuto y segundo de forma que se puedan omitir los segundos o los minutos (y segundos, claro) e instancie la clase Tiempo mostrando su valor.
@@ -29,7 +28,7 @@ Añadir un nuevo método esMayorQue(t:Tiempo):Boolean, que devuelve true si el t
 
 Añadir un nuevo método esMenorQue(t:Tiempo):Boolean, que devuelve true si el tiempo que almacena el objeto que recibe el mensaje es menor que el tiempo que almacena t. En el programa principal, debe solicitar por teclado hora, minuto y segundo del objeto t. Mostrará por pantalla el resultado obtenido al comparar si el tiempo del objeto que recibe el mensaje es menor que el tiempo de t.*/
 
-class Tiempo(val hora: Int, val minuto: Int = 0, val segundo: Int = 0){
+class Tiempo(private var hora: Int, private var minuto: Int = 0, private var segundo: Int = 0){
 
     init {
         require(hora in 0..23)
@@ -39,10 +38,18 @@ class Tiempo(val hora: Int, val minuto: Int = 0, val segundo: Int = 0){
 
 
     fun incrementar(t:Tiempo): Boolean{
+        this.segundo += t.segundo
+        this.minuto += t.minuto
+        this.hora += t.hora
 
+        return true //no sé muy bien qué retornar en estas funciones.
     }
     fun decrementar(t: Tiempo): Boolean{
+        this.segundo -= t.segundo
+        this.minuto -= t.minuto
+        this.hora -= t.hora
 
+        return true //lo mismo aquí.
     }
     fun comparar(t: Tiempo): Int{
 
@@ -70,7 +77,7 @@ class Tiempo(val hora: Int, val minuto: Int = 0, val segundo: Int = 0){
 fun main() {
     println("Por favor, inserte la hora: ")
     try {
-        val hora = readln().toInt()
+        val tHora = readln().toInt()
 
     }
     catch (e: NumberFormatException){
@@ -80,7 +87,7 @@ fun main() {
 
     println("Por favor, inserte los minutos: ")
     try {
-        val minuto = readln().toInt()
+        val tMinuto = readln().toInt()
 
     }
     catch (e: NumberFormatException){
@@ -91,7 +98,7 @@ fun main() {
     println("Por favor, inserte los segundos: ")
     try {
 
-        val segundo = readln().toInt()
+        val tSegundo = readln().toInt()
     }
     catch (e: NumberFormatException){
         println("Ese formato de segundo no es válido.")
